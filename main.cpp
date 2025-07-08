@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include "Installation/Installing.cpp"
+#include "PythonFastAPI/CreateFastAPISetup.cpp"
 #include "Windows.h"
 
 
@@ -39,7 +40,6 @@ int main() {
 
     }
 
-
     if (commandURL.contains("next")) {
 
 
@@ -55,7 +55,11 @@ int main() {
 
     }
 
-    
+    if (commandURL.contains("/fAPI")) {
+
+        createPytonScript();
+    }
+
 
     file.close();
 
