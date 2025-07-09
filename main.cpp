@@ -1,32 +1,32 @@
 ﻿#include <iostream>
-#include "Installation/Installing.cpp"
-#include "PythonFastAPI/CreateFastAPISetup.cpp"
 #include "Windows.h"
+#include "FileName.c"
+#include "Command.c"
 
 
 int main() {
 
     std::string commandURL;
+    printMessage("Enter URL for Project: ");
     std::cin >> commandURL;
 
-    std::ofstream file("Installs.data");
     ShellExecuteA(nullptr, "open", commandURL.c_str()
         , nullptr, nullptr, SW_SHOWDEFAULT);
 
-    if (commandURL.contains("Node")) {
+    if (commandURL == ("Node")) {
 
         ShellExecuteA(nullptr, "open", "choco install nodejs"
         , nullptr, nullptr, SW_SHOWDEFAULT);
 
     }
 
-    if (commandURL.contains("React")) {
-
+    if (commandURL == ("React")) {
 
         std::string type;
+        printMessage("Enter Type: ");
         std::cin >> type;
 
-        if (type.contains("npx")) {
+        if (type == "npx") {
 
             std::string nameOfProject;
             std::cin >> nameOfProject;
@@ -35,33 +35,35 @@ int main() {
             ShellExecuteA(nullptr, "open", ("npx nano-react-app " + nameOfProject).c_str(),
             nullptr, nullptr, SW_SHOWDEFAULT);
 
-            saveFile(std::move(file), nameOfProject);
+            const FILE * file = generateFile(nameOfProject.c_str(), "Main.txt");
+
+            if (file == nullptr) {
+
+                std::cout << "NULL";
+            }
         }
 
     }
 
-    if (commandURL.contains("next")) {
+    if (commandURL == "next") {
 
 
         std::string nameOfProject;
+        printMessage("Enter Name of Project Selected: ");
         std::cin >> nameOfProject;
 
 
         ShellExecuteA(nullptr, "open", ("npx create-next-app " + nameOfProject).c_str(),
         nullptr, nullptr, SW_SHOWDEFAULT);
 
+        const FILE * file = generateFile(commandURL.c_str(), "");
 
-        saveFile(std::move(file), nameOfProject);
+        if (file == nullptr) {
+
+            std::cout << "NULL";
+        }
 
     }
-
-    if (commandURL.contains("/fAPI")) {
-
-        createPytonScript();
-    }
-
-
-    file.close();
 
     system("pause > 0");
     return 0;
