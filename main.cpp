@@ -2,6 +2,7 @@
 #include "Windows.h"
 #include "FileName.c"
 #include "Command.c"
+#include "Args.c"
 
 
 int main() {
@@ -63,6 +64,13 @@ int main() {
             std::cout << "NULL";
         }
 
+    }
+
+    if (commandURL == "Express") {
+
+
+
+        args("");
     }
 
     system("pause > 0");
